@@ -68,7 +68,13 @@ class ModuleXmlConfig extends \Innomatic\Module\ModuleConfig
         // Sets value object class.
         if (strlen($cfg->valueobject->voclass)) {
             $this->voClass = $cfg->valueobject->voclass;
-        } elseif (count($cfg->valueobject->vofields)) {
+        } elseif (
+                    (
+                        is_array($cfg->valueobject->vofields) or
+                        is_object($cfg->valueobject->vofields)
+                    ) and
+                    count($cfg->valueobject->vofields)
+        ) {
             $this->voClass = 'innomatic/module/util/ModuleGenericValueObject';
         }
 

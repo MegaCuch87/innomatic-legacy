@@ -1736,8 +1736,16 @@ class Application
 
         // Check for preinstallation jobs
         //
-        if (isset($structure[$prescript]) and sizeof($structure[$prescript]))
+        if (
+            isset($structure[$prescript]) and
+            (
+                is_array($structure[$prescript]) or
+                is_object($structure[$prescript])
+            ) and
+            sizeof($structure[$prescript])
+        ) {
             include($scriptdir.$structure[$prescript]);
+        }
 
         // Install components
         //
