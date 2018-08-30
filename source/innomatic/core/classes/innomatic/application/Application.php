@@ -1903,7 +1903,14 @@ class Application
 
         // Checks for postinstallation jobs
         //
-        if (isset($structure[$postscript]) and sizeof($structure[$postscript])) {
+        if (
+            isset($structure[$prescript]) and
+            (
+                is_array($structure[$prescript]) or
+                is_object($structure[$prescript])
+            ) and
+            sizeof($structure[$prescript])
+        ) {
             include($scriptdir.$structure[$postscript]);
         }
 
